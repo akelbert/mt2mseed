@@ -1,0 +1,91 @@
+.TH MT2MSEED 1 2008/07/08
+.SH NAME
+Magnetrotelluric bin file to Mini-SEED converter
+
+.SH SYNOPSIS
+.nf
+mt2mseed [options] file1 [file2 file3 ...]
+
+.fi
+.SH DESCRIPTION
+\fBmt2mseed\fP converts Magnetotelluric (MT) bin file time series data
+to Mini-SEED format.  If an input file name is prefixed with an '@'
+character the file is assumed to contain a list of input data files,
+see \fILIST FILES\fP below.
+
+Unless a single output file is specified using the \fB-o\fP option an
+output file will be created for each contiguous segment of data.
+
+.SH OPTIONS
+
+.IP "-V         "
+Print program version and exit.
+
+.IP "-h         "
+Print program usage and exit.
+
+.IP "-v         "
+Be more verbose.  This flag can be used multiple times ("-v -v" or
+"-vv") for more verbosity.
+
+.IP "-S         "
+Include SEED blockette 100 in each output record with the sample rate
+in floating point format.  The basic format for storing sample rates
+in SEED data records is a rational approximation
+(numerator/denominator).  Precision will be lost if a given sample
+rate cannot be well approximated.  This option should be used in those
+cases.
+
+.IP "-n \fInetwork\fP"
+Specify the SEED network code to use, if not specified the network
+code will be blank.  It is highly recommended to specify a network
+code.
+
+.IP "-s \fIstation\fP"
+Specify the SEED station code to use, if not specified the station
+code will be blank.  It is highly recommended to specify a network
+code.
+
+.IP "-l \fIlocation\fP"
+Specify the SEED location ID to use, if not specified the location
+code will be blank.
+
+.IP "-r \fIbytes\fP"
+Specify the Mini-SEED record length in \fIbytes\fP, default is 4096.
+
+.IP "-e \fIencoding\fP"
+Specify the Mini-SEED data encoding format, default is 10 (Steim-1
+compression).  Other supported encoding formats include 11 (Steim-2
+compression) and 3 (32-bit integers).
+
+.IP "-b \fIbyteorder\fP"
+Specify the Mini-SEED byte order, default is 1 (big-endian or most
+significant byte first).  The other option is 0 (little-endian or
+least significant byte first).  It is highly recommended to always
+create big-endian SEED.
+
+.IP "-o \fIoutfile\fP"
+Specify a single output file that all Mini-SEED records should be
+written to, existing file will be overwritten.
+
+.SH LIST FILES
+If an input file is prefixed with an '@' character the file is assumed
+to contain a list of file for input.  Multiple list files can be
+combined with multiple input files on the command line.  The last,
+space separated field on each line is assumed to be the file name to
+be read.
+
+An example of a simple text list:
+
+.nf
+XY123.bin
+XY124.bin
+XY125.bin
+.fi
+
+.SH AUTHORS
+.nf
+Chad Trabant, IRIS Data Management Center
+
+Anna Kelbert, COAS/OSU
+.fi

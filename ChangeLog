@@ -1,0 +1,30 @@
+2008.220: 1.0
+	- Update to libmseed 2.1.6, including significantly increased
+	Steim 1 & 2 encoding performance.
+
+2008.193: 0.4
+	- Now, try byte swapping if the number of gaps determined
+	from the bin header length is unreasonable (< 0 || > 100).
+	- Updated standard output.
+	- Updated the naming convention for the output files.
+	The default is now a single output file corresponding to a
+	single input file, in the format EM.STA.yyyy-mm-ddTHH:MM:SS.
+	The default functionality of v0.3 (separate file for each
+	channel segment) can be achieved by specifying the option -C.
+
+2008.190: 0.3
+	- Change default encoding to Steim-2 (11).
+	- Detect gap samples as either equal to the missing
+	data value or >= to the max signed 32-bit integer.
+	- Add -o option to specify a single output file.
+
+2008.190: 0.2
+	- Update libmseed to 2.1.5.
+	- Change name to mt2mseed from nims2mseed.
+	- Fix encoding selection, defaults to Steim-1 (10).
+	- Add byte swapping read_bin_file().
+	- Add logic to skip samples and pack separate segments
+	when data values equal the missing data flag value.
+
+2008.141: version 0.1 
+	- Initial version.

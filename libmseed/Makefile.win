@@ -1,16 +1,11 @@
 #
-#
-# Nmake File For libmseed - MS Visual C++ version
+# Nmake file For libmseed - MS Visual C/C++ version
 # Use 'nmake -f Makefile.win'
-#
-# THIS HAS NEVER BEEN TESTED
-# Some modification might be required.
 
 NODEBUG=1
 
-!include <ntwin32.mak>
-
-INCS = /I.
+INCS = -I.
+OPTS = -D_CRT_SECURE_NO_WARNINGS
 LIB = libmseed.lib
 DLL = libmseed.dll
 
@@ -23,8 +18,11 @@ OBJS=	fileutils.obj	\
 	pack.obj	\
 	packdata.obj	\
 	traceutils.obj	\
+	tracelist.obj	\
+	parseutils.obj	\
 	unpack.obj	\
 	unpackdata.obj  \
+	selection.obj	\
 	logging.obj
 
 all: lib
@@ -36,8 +34,7 @@ dll: $(OBJS)
 	link.exe /dll /nologo /out:$(DLL) $(OBJS)
 
 .c.obj:
-   $(cc) /nologo $(cflags) $(cdebug) $(cvarsmt) $(tflags) $(INCS) $<
-
+	$(CC) /nologo $(CFLAGS) $(INCS) $(OPTS) /c $<
 
 # Clean-up directives
 clean:

@@ -18,7 +18,7 @@
 
 #include "readNIMSbin.h"
 
-#define VERSION "1.0"
+#define VERSION "1.1"
 #define PACKAGE "mt2mseed"
 
 struct listnode {
@@ -51,8 +51,8 @@ static FILE *outfp       = 0;
 /* A list of input files */
 struct listnode *filelist = 0;
 
-static int packedsamples = 0;
-static int packedrecords = 0;
+static int64_t packedsamples = 0;
+static int64_t packedrecords = 0;
 
 int
 main (int argc, char **argv)
@@ -75,7 +75,7 @@ main (int argc, char **argv)
       flp = flp->next;
     }
   
-  fprintf (stderr, "Packed %d samples into %d records\n",
+  fprintf (stderr, "Packed %" PRId64 " samples into %" PRId64 " records\n",
 	   packedsamples, packedrecords);
   
   /* Close user specified output file */
@@ -101,8 +101,8 @@ packmsr (MSRecord *msr)
 {
   FILE *ofp = 0;
   char ofname[1024], timestr[20];
-  int trpackedsamples = 0;
-  int trpackedrecords = 0;
+  int64_t trpackedsamples = 0;
+  int64_t trpackedrecords = 0;
   
   if ( outfile )
     {
